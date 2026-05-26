@@ -2,6 +2,8 @@
 
 Minimal Python project used to verify the DevClaw development pipeline.
 
+This repository is used for DevClaw pipeline smoke tests.
+
 ## Run
 
 ```bash
