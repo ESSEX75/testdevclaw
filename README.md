@@ -2,6 +2,8 @@
 
 Minimal Python project used to verify the DevClaw development pipeline.
 
+Sprint smoke marker: parallel minimal code change A (#35).
+
 ## Run
 
 ```bash
