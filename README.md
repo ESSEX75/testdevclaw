@@ -2,7 +2,7 @@
 
 Minimal Python project used to verify the DevClaw development pipeline.
 
-This repository is used for DevClaw pipeline smoke tests.
+Sprint smoke marker: parallel minimal code change A (#35).
 
 ## Run
 
