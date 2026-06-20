@@ -22,6 +22,6 @@ Pipeline check passed for DevClaw.
 python3 -m unittest discover -s tests
 ```
 
-## Pipeline Verification
+## Sprint smoke marker
 
-- 2026-05-30 17:48 UTC: DevClaw worker dispatch timestamp note for issue #5.
+- minimal-code-a: branch and PR creation check for sprint-minimal-pr-smoke-2.
