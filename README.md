@@ -19,3 +19,7 @@ Pipeline check passed for DevClaw.
 ```bash
 python3 -m unittest discover -s tests
 ```
+
+## Pipeline Verification
+
+- 2026-05-30 17:48 UTC: DevClaw worker dispatch timestamp note for issue #5.
