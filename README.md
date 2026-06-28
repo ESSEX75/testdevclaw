@@ -25,3 +25,4 @@ python3 -m unittest discover -s tests
 ## Sprint smoke marker
 
 - minimal-code-a: branch and PR creation check for sprint-minimal-pr-smoke-2.
+- issue-69: standard DevClaw worker workflow check.
