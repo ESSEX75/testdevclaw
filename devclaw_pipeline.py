@@ -1,6 +1,7 @@
 """Tiny module used to verify the DevClaw development pipeline."""
 
 DEFAULT_PIPELINE_NAME = "DevClaw"
+DEMO_PIPELINE_CONSTANT = "demo-pipeline-value"
 SPRINT_STEP_ONE_MARKER = "test-step-one"
 SPRINT_STEP_TWO_MARKER = "test-step-two"
 
