@@ -13,7 +13,7 @@ python3 devclaw_pipeline.py
 Expected output:
 
 ```text
-Pipeline check passed for DevClaw.
+Pipeline verification passed for DevClaw.
 ```
 
 ## Test
