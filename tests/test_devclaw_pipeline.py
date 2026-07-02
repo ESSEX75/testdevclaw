@@ -4,6 +4,7 @@ from devclaw_pipeline import (
     build_message,
     sprint_step_four_marker,
     sprint_step_marker,
+    sprint_step_three_marker,
     sprint_step_two_marker,
 )
 
@@ -20,6 +21,9 @@ class BuildMessageTest(unittest.TestCase):
 
     def test_sprint_step_two_marker_identifies_step_two(self):
         self.assertEqual(sprint_step_two_marker(), "test-step-two")
+
+    def test_sprint_step_three_marker_identifies_step_three(self):
+        self.assertEqual(sprint_step_three_marker(), "test-step-three")
 
     def test_sprint_step_four_marker_identifies_step_four(self):
         self.assertEqual(sprint_step_four_marker(), "test-step-four")
