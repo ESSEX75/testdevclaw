@@ -4,6 +4,7 @@ DEFAULT_PIPELINE_NAME = "DevClaw"
 DEMO_PIPELINE_CONSTANT = "demo-pipeline-value"
 SPRINT_STEP_ONE_MARKER = "test-step-one"
 SPRINT_STEP_TWO_MARKER = "test-step-two"
+SPRINT_STEP_FOUR_MARKER = "test-step-four"
 
 
 def build_message(name: str = DEFAULT_PIPELINE_NAME) -> str:
@@ -20,6 +21,11 @@ def sprint_step_marker() -> str:
 def sprint_step_two_marker() -> str:
     """Return the marker for sprint step two."""
     return SPRINT_STEP_TWO_MARKER
+
+
+def sprint_step_four_marker() -> str:
+    """Return the marker for sprint step four."""
+    return SPRINT_STEP_FOUR_MARKER
 
 
 def main() -> None:
