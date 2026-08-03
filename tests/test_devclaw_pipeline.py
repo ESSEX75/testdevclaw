@@ -2,6 +2,7 @@ import unittest
 
 from devclaw_pipeline import (
     build_message,
+    sprint_step_five_marker,
     sprint_step_four_marker,
     sprint_step_marker,
     sprint_step_three_marker,
@@ -27,6 +28,9 @@ class BuildMessageTest(unittest.TestCase):
 
     def test_sprint_step_four_marker_identifies_step_four(self):
         self.assertEqual(sprint_step_four_marker(), "test-step-four")
+
+    def test_sprint_step_five_marker_identifies_step_five(self):
+        self.assertEqual(sprint_step_five_marker(), "test-step-five")
 
 
 if __name__ == "__main__":
