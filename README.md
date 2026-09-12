@@ -16,6 +16,9 @@ Expected output:
 Pipeline verification passed for DevClaw.
 ```
 
+Open `status.html` in a browser to view the responsive sample application
+status page.
+
 ## Test
 
 ```bash
