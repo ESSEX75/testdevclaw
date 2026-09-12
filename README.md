@@ -22,6 +22,20 @@ Pipeline verification passed for DevClaw.
 python3 -m unittest discover -s tests
 ```
 
+## Health check
+
+Start the local health server:
+
+```bash
+python3 health_server.py
+```
+
+`GET http://127.0.0.1:8000/health` returns `200 OK` with:
+
+```json
+{"status": "ok"}
+```
+
 ## Sprint smoke marker
 
 - minimal-code-a: branch and PR creation check for sprint-minimal-pr-smoke-2.
