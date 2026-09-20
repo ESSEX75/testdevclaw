@@ -3,4 +3,3 @@ name = "test-dev-project"
 version = "1.0.0"
 description = "Minimal Python project used to verify the DevClaw development pipeline."
 requires-python = ">=3.11"
-
