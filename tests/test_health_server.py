@@ -3,6 +3,7 @@ import threading
 import tomllib
 import unittest
 import uuid
+from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request
 from urllib.request import urlopen
@@ -30,6 +31,17 @@ class HealthEndpointTest(unittest.TestCase):
             self.assertEqual(response.status, 200)
             self.assertEqual(response.headers["Content-Type"], "application/json")
             self.assertEqual(json.load(response), {"status": "ok"})
+
+    def test_version_endpoint_returns_package_version(self):
+        port = self.server.server_address[1]
+        metadata_path = Path(__file__).parents[1] / "pyproject.toml"
+        with metadata_path.open("rb") as metadata_file:
+            package_version = tomllib.load(metadata_file)["project"]["version"]
+
+        with urlopen(f"http://127.0.0.1:{port}/version") as response:
+            self.assertEqual(response.status, 200)
+            self.assertEqual(response.headers["Content-Type"], "application/json")
+            self.assertEqual(json.load(response), {"version": package_version})
 
     def test_response_includes_generated_request_id(self):
         port = self.server.server_address[1]

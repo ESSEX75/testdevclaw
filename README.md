@@ -39,6 +39,15 @@ python3 health_server.py
 {"status": "ok"}
 ```
 
+## Application version
+
+With the local server running, `GET http://127.0.0.1:8000/version` returns
+`200 OK` and the version declared in `pyproject.toml`:
+
+```json
+{"version": "1.0.0"}
+```
+
 Every HTTP response includes an `X-Request-Id` header. The server preserves an
 incoming identifier when it contains 1–128 letters, numbers, periods,
 underscores, or hyphens. If the header is absent or invalid, the server returns
