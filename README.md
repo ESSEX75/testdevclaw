@@ -39,6 +39,15 @@ python3 health_server.py
 {"status": "ok"}
 ```
 
+## Application version
+
+With the local server running, `GET http://127.0.0.1:8000/version` returns
+`200 OK` and the version declared in `pyproject.toml`:
+
+```json
+{"version": "1.0.0"}
+```
+
 ## Sprint smoke marker
 
 - minimal-code-a: branch and PR creation check for sprint-minimal-pr-smoke-2.
