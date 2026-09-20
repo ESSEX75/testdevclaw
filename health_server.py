@@ -1,11 +1,24 @@
 """Minimal HTTP server exposing the service health status."""
 
 import json
+import re
+import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+
+REQUEST_ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]{1,128}$")
 
 
 class HealthRequestHandler(BaseHTTPRequestHandler):
     """Serve the health check endpoint."""
+
+    def end_headers(self) -> None:
+        """Add a request identifier to every response."""
+        request_id = self.headers.get("X-Request-Id", "")
+        if not REQUEST_ID_PATTERN.fullmatch(request_id):
+            request_id = str(uuid.uuid4())
+        self.send_header("X-Request-Id", request_id)
+        super().end_headers()
 
     def do_GET(self) -> None:
         if self.path != "/health":
