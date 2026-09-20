@@ -39,6 +39,11 @@ python3 health_server.py
 {"status": "ok"}
 ```
 
+Every HTTP response includes an `X-Request-Id` header. The server preserves an
+incoming identifier when it contains 1–128 letters, numbers, periods,
+underscores, or hyphens. If the header is absent or invalid, the server returns
+a newly generated UUID instead.
+
 ## Sprint smoke marker
 
 - minimal-code-a: branch and PR creation check for sprint-minimal-pr-smoke-2.
