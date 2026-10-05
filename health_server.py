@@ -34,6 +34,8 @@ class HealthRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         if self.path == "/health":
             response = {"status": "ok"}
+        elif self.path == "/ready":
+            response = {"status": "ready"}
         elif self.path == "/version":
             response = {"version": application_version()}
         else:
