@@ -61,6 +61,22 @@ class HealthEndpointTest(unittest.TestCase):
         with urlopen(request) as response:
             self.assertEqual(response.headers["X-Request-Id"], "client-request_123")
 
+    def test_unknown_get_routes_return_json_404(self):
+        port = self.server.server_address[1]
+
+        for path in ("/missing", "/health/extra", "/?unknown=true"):
+            with self.subTest(path=path):
+                with self.assertRaises(HTTPError) as error:
+                    urlopen(f"http://127.0.0.1:{port}{path}")
+
+                with error.exception as response:
+                    self.assertEqual(response.code, 404)
+                    self.assertEqual(response.headers["Content-Type"], "application/json")
+                    self.assertEqual(
+                        json.load(response),
+                        {"error": "not_found", "message": "Route not found"},
+                    )
+
     def test_error_response_includes_request_id(self):
         port = self.server.server_address[1]
 

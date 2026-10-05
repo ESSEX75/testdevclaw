@@ -37,11 +37,14 @@ class HealthRequestHandler(BaseHTTPRequestHandler):
         elif self.path == "/version":
             response = {"version": application_version()}
         else:
-            self.send_error(404)
+            self._send_json(404, {"error": "not_found", "message": "Route not found"})
             return
 
+        self._send_json(200, response)
+
+    def _send_json(self, status: int, response: dict[str, str]) -> None:
         body = json.dumps(response).encode("utf-8")
-        self.send_response(200)
+        self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()

@@ -48,6 +48,17 @@ With the local server running, `GET http://127.0.0.1:8000/version` returns
 {"version": "1.0.0"}
 ```
 
+## Unknown routes
+
+An unmatched `GET` path returns `404 Not Found` with
+`Content-Type: application/json` and this stable error format:
+
+```json
+{"error": "not_found", "message": "Route not found"}
+```
+
+The `error` value is a machine-readable code; `message` is human-readable.
+
 Every HTTP response includes an `X-Request-Id` header. The server preserves an
 incoming identifier when it contains 1–128 letters, numbers, periods,
 underscores, or hyphens. If the header is absent or invalid, the server returns
