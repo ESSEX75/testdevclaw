@@ -32,6 +32,14 @@ class HealthEndpointTest(unittest.TestCase):
             self.assertEqual(response.headers["Content-Type"], "application/json")
             self.assertEqual(json.load(response), {"status": "ok"})
 
+    def test_ready_endpoint_returns_readiness_status(self):
+        port = self.server.server_address[1]
+
+        with urlopen(f"http://127.0.0.1:{port}/ready") as response:
+            self.assertEqual(response.status, 200)
+            self.assertEqual(response.headers["Content-Type"], "application/json")
+            self.assertEqual(json.load(response), {"status": "ready"})
+
     def test_version_endpoint_returns_package_version(self):
         port = self.server.server_address[1]
         metadata_path = Path(__file__).parents[1] / "pyproject.toml"

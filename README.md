@@ -39,6 +39,18 @@ python3 health_server.py
 {"status": "ok"}
 ```
 
+## Readiness check
+
+With the local server running, `GET http://127.0.0.1:8000/ready` returns
+`200 OK` with content type `application/json` and this body while the server
+is ready to serve traffic:
+
+```json
+{"status": "ready"}
+```
+
+The endpoint is read-only and does not perform external dependency checks.
+
 ## Application version
 
 With the local server running, `GET http://127.0.0.1:8000/version` returns
