@@ -18,6 +18,8 @@ def application_version() -> str:
 
 
 REQUEST_ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]{1,128}$")
+GET_ROUTES = frozenset({"/health", "/ready", "/version"})
+NOT_FOUND_RESPONSE = {"error": "not_found", "message": "Route not found"}
 
 
 class HealthRequestHandler(BaseHTTPRequestHandler):
@@ -39,18 +41,29 @@ class HealthRequestHandler(BaseHTTPRequestHandler):
         elif self.path == "/version":
             response = {"version": application_version()}
         else:
-            self._send_json(404, {"error": "not_found", "message": "Route not found"})
+            self._send_json(404, NOT_FOUND_RESPONSE)
             return
 
         self._send_json(200, response)
 
-    def _send_json(self, status: int, response: dict[str, str]) -> None:
+    def _handle_other_method(self) -> None:
+        if self.path in GET_ROUTES:
+            self.send_error(501, f"Unsupported method ({self.command!r})")
+        else:
+            self._send_json(404, NOT_FOUND_RESPONSE, send_body=self.command != "HEAD")
+
+    do_HEAD = do_POST = do_PUT = do_PATCH = do_DELETE = do_OPTIONS = _handle_other_method
+
+    def _send_json(
+        self, status: int, response: dict[str, str], *, send_body: bool = True
+    ) -> None:
         body = json.dumps(response).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
-        self.wfile.write(body)
+        if send_body:
+            self.wfile.write(body)
 
     def log_message(self, format: str, *args: object) -> None:
         """Keep routine health requests out of command-line output."""

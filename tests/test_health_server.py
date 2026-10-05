@@ -85,6 +85,44 @@ class HealthEndpointTest(unittest.TestCase):
                         {"error": "not_found", "message": "Route not found"},
                     )
 
+    def test_unknown_routes_return_json_404_for_other_methods(self):
+        port = self.server.server_address[1]
+
+        for method in ("POST", "PUT", "PATCH", "DELETE", "OPTIONS"):
+            with self.subTest(method=method):
+                request = Request(f"http://127.0.0.1:{port}/missing", method=method)
+                with self.assertRaises(HTTPError) as error:
+                    urlopen(request)
+
+                with error.exception as response:
+                    self.assertEqual(response.code, 404)
+                    self.assertEqual(response.headers["Content-Type"], "application/json")
+                    self.assertEqual(
+                        json.load(response),
+                        {"error": "not_found", "message": "Route not found"},
+                    )
+
+    def test_unknown_head_route_returns_json_headers_without_body(self):
+        port = self.server.server_address[1]
+        request = Request(f"http://127.0.0.1:{port}/missing", method="HEAD")
+
+        with self.assertRaises(HTTPError) as error:
+            urlopen(request)
+
+        with error.exception as response:
+            self.assertEqual(response.code, 404)
+            self.assertEqual(response.headers["Content-Type"], "application/json")
+            self.assertEqual(response.read(), b"")
+
+    def test_registered_route_with_unsupported_method_remains_501(self):
+        port = self.server.server_address[1]
+        request = Request(f"http://127.0.0.1:{port}/health", method="POST")
+
+        with self.assertRaises(HTTPError) as error:
+            urlopen(request)
+
+        self.assertEqual(error.exception.code, 501)
+
     def test_error_response_includes_request_id(self):
         port = self.server.server_address[1]
 

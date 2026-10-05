@@ -62,7 +62,8 @@ With the local server running, `GET http://127.0.0.1:8000/version` returns
 
 ## Unknown routes
 
-An unmatched `GET` path returns `404 Not Found` with
+An unmatched path requested with `GET`, `HEAD`, `POST`, `PUT`, `PATCH`,
+`DELETE`, or `OPTIONS` returns `404 Not Found` with
 `Content-Type: application/json` and this stable error format:
 
 ```json
@@ -70,6 +71,9 @@ An unmatched `GET` path returns `404 Not Found` with
 ```
 
 The `error` value is a machine-readable code; `message` is human-readable.
+As required by HTTP, a `HEAD` response has the same status and JSON headers
+but no body. Non-`GET` requests to registered endpoints retain their existing
+`501 Not Implemented` response.
 
 Every HTTP response includes an `X-Request-Id` header. The server preserves an
 incoming identifier when it contains 1–128 letters, numbers, periods,
