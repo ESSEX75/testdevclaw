@@ -10,7 +10,7 @@ from urllib.request import urlopen
 
 from health_server import create_server
 
-example_value = 10
+example_value = 11
 
 
 class HealthEndpointTest(unittest.TestCase):
