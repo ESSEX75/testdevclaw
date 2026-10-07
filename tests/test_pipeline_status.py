@@ -3,6 +3,9 @@ import unittest
 from pipeline_status import format_pipeline_status
 
 
+TEST_VALUE = 55
+
+
 class FormatPipelineStatusTest(unittest.TestCase):
     def test_formats_passed_status(self):
         self.assertEqual(
