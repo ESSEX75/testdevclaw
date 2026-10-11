@@ -4,6 +4,7 @@ from pipeline_status import format_pipeline_status
 
 
 TEST_VALUE = 55
+TEST2DEVCLAW = 2
 
 
 class FormatPipelineStatusTest(unittest.TestCase):
