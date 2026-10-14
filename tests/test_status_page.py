@@ -3,7 +3,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 
-STATUS_PAGE = Path(__file__).resolve().parents[1] / "status.html"
+STATUS_HTML_PATH = Path(__file__).resolve().parents[1] / "status.html"
 
 
 class StatusContentParser(HTMLParser):
@@ -31,7 +31,7 @@ class StatusContentParser(HTMLParser):
 class StatusPageTest(unittest.TestCase):
     def test_renders_application_status(self):
         parser = StatusContentParser()
-        parser.feed(STATUS_PAGE.read_text(encoding="utf-8"))
+        parser.feed(STATUS_HTML_PATH.read_text(encoding="utf-8"))
 
         self.assertTrue(parser.status_role_found)
         self.assertEqual("".join(parser.status_text).strip(), "All systems operational")
