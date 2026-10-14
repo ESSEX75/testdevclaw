@@ -30,11 +30,11 @@ class StatusContentParser(HTMLParser):
 
 class StatusPageTest(unittest.TestCase):
     def test_renders_application_status(self):
-        parser = StatusContentParser()
-        parser.feed(STATUS_HTML_PATH.read_text(encoding="utf-8"))
+        status_parser = StatusContentParser()
+        status_parser.feed(STATUS_HTML_PATH.read_text(encoding="utf-8"))
 
-        self.assertTrue(parser.status_role_found)
-        self.assertEqual("".join(parser.status_text).strip(), "All systems operational")
+        self.assertTrue(status_parser.status_role_found)
+        self.assertEqual("".join(status_parser.status_text).strip(), "All systems operational")
 
 
 if __name__ == "__main__":
