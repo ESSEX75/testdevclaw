@@ -12,9 +12,9 @@ def normalize_worker_level(level: str) -> str:
     if not normalized_level:
         raise ValueError("Worker level must not be empty.")
     if normalized_level not in SUPPORTED_WORKER_LEVELS:
-        supported = ", ".join(sorted(SUPPORTED_WORKER_LEVELS))
+        supported_levels = ", ".join(sorted(SUPPORTED_WORKER_LEVELS))
         raise ValueError(
-            f"Unsupported worker level {level!r}. Supported levels: {supported}."
+            f"Unsupported worker level {level!r}. Supported levels: {supported_levels}."
         )
 
     return normalized_level
